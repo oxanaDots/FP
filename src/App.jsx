@@ -1,20 +1,12 @@
-import { useState } from 'react'
 import Home from './Home'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './App.css'
-
+import './index.css' 
 function App() {
 
 
   const router = createBrowserRouter([
-    {
-      path: "/signup",
-      element: <SignUp/>
-    },
-    {
-      path:"/signin",
-      element: <SignIn/>
-    },
+   
     { path: '/home',
       element: <Home/>
     }
@@ -22,10 +14,9 @@ function App() {
 
   return (
     <>
- 
-    <FormProvider>
+
       <RouterProvider router={router}/>
-    </FormProvider>
+   
     </>
   )
 }
