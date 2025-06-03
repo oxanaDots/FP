@@ -11,6 +11,7 @@ export default {
       colors: {
         primary: {
           light: 'rgba(46, 16, 101, 0.3)',
+          medium: colors.zinc[200],
           dark: colors.violet[950],
         },
         secondary: {
@@ -20,7 +21,7 @@ export default {
         },
         ternary: {
           light: colors.zinc[100],
-          medium: colors.zinc[300],
+          medium: colors.zinc[400],
           dark: colors.orange[600],
         },
       },

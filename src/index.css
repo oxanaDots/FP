@@ -8,7 +8,7 @@
 font-family: Verdana, Geneva, Tahoma, sans-serif;}
 
 .submit-btn{
-    @apply  w-full py-2 px-4 mt-8 self-center rounded-full bg-violet-950 text-orange-50
+    @apply   py-2 px-4 mt-8 self-center rounded-full bg-violet-950 text-orange-50
 }
 
 .save-btn{
@@ -76,4 +76,12 @@ form{
     border-top: none;
   }
   
+  ::-webkit-scrollbar {
+    width: 10px;
   
+  }
+  
+  ::-webkit-scrollbar-thumb {
+   @apply  bg-primary-medium rounded-xl border
+   
+  }
