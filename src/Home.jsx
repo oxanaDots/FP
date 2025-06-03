@@ -1,10 +1,12 @@
 import React from 'react';
+import NavMenu from './NavMenu';
 
 function Home() {
   return (
-    <div>
-      
-    </div>
+   <section>
+    <NavMenu/>
+    <h2>Hello</h2>
+   </section>
   );
 }
 
