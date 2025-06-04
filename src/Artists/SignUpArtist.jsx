@@ -26,6 +26,26 @@ const [links, setLinks] = useState([])
              role: 'artist'
           };        
           setArtistFormData(updatedData);
+
+          fetch('http://localhost:5000/api/artist_signup', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedData),
+          })
+            .then(async (res) => {
+              const response = await res.json();
+              if (res.ok) {
+                console.log('✅ Artist registered:', response);
+                navigate('/artist_dashboard'); // only navigate if successful
+              } else {
+                console.error(' Signup error:', response.error || response);
+              }
+            })
+            .catch((err) => {
+              console.error('Network error:', err);
+            });
           navigate('/artist_dashboard')
     }
     console.log(artistFormData)  

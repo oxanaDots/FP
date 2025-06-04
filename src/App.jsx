@@ -7,6 +7,7 @@ import { ArtistFormProvider } from './Artists/ArtistFormContext'
 import Roles from './Artists/Roles'
 import BusinessSignup from './Business/BusinessSignUp'
 import { BusinessFormProvider } from './Business/BusinessFormContext'
+import ArtistDashboard from './Artists/ArtistDahsBoard'
 function App() {
 
 
@@ -28,6 +29,10 @@ function App() {
     {
       path: '/business_signup',
       element: <BusinessSignup/>
+    },
+    {
+      path: '/artist_dashboard',
+      element: <ArtistDashboard/>
     },
   ])
 

@@ -1,6 +1,8 @@
+
 import { Router } from 'express';
-const router = Router();
 import Artist from '../artist_schema/ArtistSchema.js';
+
+const router = Router();
 
 router.post('/artist_signup', async (req, res) => {
   try {
