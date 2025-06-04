@@ -1,6 +1,7 @@
 import React from 'react';
 import NavMenu from './NavMenu';
 import ExhibitionItem from './Components/ExhibitionItem';
+import { NavLink } from 'react-router-dom';
 
 function Home() {
   return (
@@ -14,7 +15,7 @@ function Home() {
 <p className='text-sm py-3'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 </p>
-   <div>   <button className='submit-btn'>Create an Account</button>
+   <div>   <NavLink to='/specify_role'><button className='submit-btn'>Create an Account</button></NavLink>
    </div>
    </section>
 

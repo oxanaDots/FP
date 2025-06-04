@@ -2,28 +2,31 @@ import { useArtistForm } from './ArtistFormContext'
 import InputField from '../InputField';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function SignUpArtist() {
+    const navigate = useNavigate()
     const {
         artistFormData, setArtistFormData
     } = useArtistForm()
 const [but, updateButt] = useState(false)
 const [links, setLinks] = useState([])
-    const {handleSubmit, register, formState: {errors}} = useForm({shouldUseNativeValidation: false})
+    const {handleSubmit, register, watch, formState: {errors}} = useForm({shouldUseNativeValidation: false})
 
     function onSubmit(data){
    
 
-        const linksArray = links
+        const linksArray = links.length > 0 && links
         .split(',')
         .map(link => link.trim())
         .filter(link => link !== '');
         const updatedData = {
             ...data,
-            links: linksArray,
+             links: linksArray.length > 0 ? linksArray : [],
+             role: 'artist'
           };        
           setArtistFormData(updatedData);
-          
+          navigate('/artist_dashboard')
     }
     console.log(artistFormData)  
     
@@ -101,6 +104,34 @@ const [links, setLinks] = useState([])
             }}
         error={errors.phoneNumber}
       />
+      <InputField
+  name="password"
+  placeholder="password"
+  type="password"
+  register={register}
+  validationRules={{
+    required: 'Password is required',
+    minLength: {
+      value: 6,
+      message: 'Password must be at least 6 characters long',
+    },
+  }}
+  error={errors.password}
+/>
+
+<InputField
+  name="confirmPassword"
+  placeholder="confirm password"
+  type="password"
+  register={register}
+  validationRules={{
+    required: 'Please confirm your password',
+    validate: (value) =>
+      value === watch('password') || 'Passwords do not match',
+  }}
+  error={errors.confirmPassword}
+/>
+
 <div className='flex flex-col w-full  gap-2 pt-2  self-left cursor-pointer'>
    <div onClick={()=> updateButt (prev=> ! prev) }  className='flex  justify-left items-center gap-5  self-left '>
         <span >{but ? '-':'+'}</span>
