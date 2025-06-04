@@ -12,7 +12,8 @@ export const ArtistFormProvider = ({ children }) => {
     phoneNumber:'',
     links: [],
     location:'',
-    postcode:''
+    postcode:'',
+    password:'',
   });
 
   return (

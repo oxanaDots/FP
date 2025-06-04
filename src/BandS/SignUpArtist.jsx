@@ -11,12 +11,11 @@ function SignUpArtist() {
     } = useArtistForm()
 const [but, updateButt] = useState(false)
 const [links, setLinks] = useState([])
+
     const {handleSubmit, register, watch, formState: {errors}} = useForm({shouldUseNativeValidation: false})
 
     function onSubmit(data){
-   
-
-        const linksArray = links.length > 0 && links
+           const linksArray = links.length > 0 && links
         .split(',')
         .map(link => link.trim())
         .filter(link => link !== '');
@@ -30,7 +29,7 @@ const [links, setLinks] = useState([])
           fetch('http://localhost:5001/api/artist_signup', {
              method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-             body: JSON.stringify(data),
+             body: JSON.stringify(updatedData),
              credentials: 'include', 
           })
             .then(async (res) => {
@@ -45,7 +44,6 @@ const [links, setLinks] = useState([])
             .catch((err) => {
               console.error('Network error:', err);
             });
-          
     }
  
     
@@ -141,7 +139,7 @@ const [links, setLinks] = useState([])
 <InputField
   name="confirmPassword"
   placeholder="confirm password"
-  type="password"
+  type="confirmPassword"
   register={register}
   validationRules={{
     required: 'Please confirm your password',

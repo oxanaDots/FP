@@ -2,12 +2,12 @@ import Home from './Home'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './App.css'
 import './index.css' 
-import SignUpArtist from './Artists/SignUpArtist'
-import { ArtistFormProvider } from './Artists/ArtistFormContext'
-import Roles from './Artists/Roles'
+import SignUpArtist from './BandS/SignUpArtist'
+import { ArtistFormProvider } from './BandS/ArtistFormContext'
+import Roles from './BandS/Roles'
 import BusinessSignup from './Business/BusinessSignUp'
 import { BusinessFormProvider } from './Business/BusinessFormContext'
-import ArtistDashboard from './Artists/ArtistDahsBoard'
+import ArtistDashboard from './BandS/ArtistDahsBoard'
 function App() {
 
 

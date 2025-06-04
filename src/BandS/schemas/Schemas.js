@@ -8,7 +8,8 @@ const artistSchema = new Schema({
   location: String,
   postcode: String,
   links: [String],
-  role: { type: String, default: 'artist' }
+  password: String,
+  role: { type: String, default: 'artist' },
 }, { timestamps: true });
 
 const businessSchema = new Schema({
@@ -18,8 +19,11 @@ const businessSchema = new Schema({
   location: String,
   postcode: String,
   businessType: String,
+  password: String,
   role: { type: String, default: 'business' }
 }, { timestamps: true });
 
-export const Artist = model('Artist', artistSchema);
-export const Business = model('Business', businessSchema);
+const Artist = model('Artist', artistSchema);
+ const Business = model('Business', businessSchema);
+
+ export  {Artist, Business}

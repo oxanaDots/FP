@@ -2,17 +2,35 @@ import React from 'react';
 import InputField from '../Components/InputField';
 import { useForm } from 'react-hook-form';
 import {  useBusinessForm } from './BusinessFormContext';
-
+import { useNavigate } from 'react-router-dom';
 function BusinessSignup() {
       const {handleSubmit, register, watch, formState: {errors}} = useForm({shouldUseNativeValidation: false})
     const {businessFormData, setbusinessFormData} = useBusinessForm()
+    const navigate = useNavigate()
       const onSubmit =(data)=>{
            const newData = {
             ...data,
             role: 'business'
            }
            setbusinessFormData(newData)
-           
+           fetch('http://localhost:5001/api/business_signup', {
+            method: 'POST',
+             headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newData),
+            credentials: 'include', 
+         })
+           .then(async (res) => {
+             const response = await res.json();
+             if (res.ok) {
+               console.log('✅ Bsuiness registered:', response);
+               navigate('/home');
+             } else {
+               console.error(' Signup error:', response.error || response);
+             }
+           })
+           .catch((err) => {
+             console.error('Network error:', err);
+           });
       }
       console.log(businessFormData)
   return (
