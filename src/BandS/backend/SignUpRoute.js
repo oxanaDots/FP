@@ -38,4 +38,29 @@ router.post('/business_signup', async (req, res) => {
     }
   });
 
+
+  router.post('/signin', async (req, res) => {
+    const { email, password } = req.body;
+  
+    try {
+      let user = await Artist.findOne({ email });
+      let role = 'artist';
+  
+      if (!user) {
+        user = await Business.findOne({ email });
+        role = 'business';
+      }
+  
+      if (!user) return res.status(404).json({ error: 'User not found' });
+  
+      const match = bcrypt.compare(password, user.password);
+      if (!match) return res.status(401).json({ error: 'Invalid password' });
+  
+      res.status(200).json({ message: 'Login successful', user, role });
+    } catch (err) {
+      res.status(500).json({ error: 'Server error' });
+    }
+  });
+  
+
 export default router;

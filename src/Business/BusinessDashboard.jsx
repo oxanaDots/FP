@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ArtistDashboard() {
+function BusinessDashboard() {
   return (
     <div>
       
@@ -8,4 +8,4 @@ function ArtistDashboard() {
   );
 }
 
-export default ArtistDashboard;
+export default BusinessDashboard;
