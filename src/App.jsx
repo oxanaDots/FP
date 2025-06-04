@@ -2,6 +2,8 @@ import Home from './Home'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './App.css'
 import './index.css' 
+import SignUpArtist from './Components/Artists/SignUpArtist'
+import { ArtistFormProvider } from './Components/Artists/ArtistFormContext'
 function App() {
 
 
@@ -9,13 +11,20 @@ function App() {
    
     { path: '/home',
       element: <Home/>
+    },
+   
+    {
+      path: '/artist_signup',
+      element: <SignUpArtist/>
     }
   ])
 
   return (
     <>
-
-      <RouterProvider router={router}/>
+<ArtistFormProvider>
+<RouterProvider router={router}/>
+</ArtistFormProvider>
+     
    
     </>
   )

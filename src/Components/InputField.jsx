@@ -1,6 +1,4 @@
 import React from 'react';
-import { FieldError, UseFormRegister } from 'react-hook-form';
-
 
 
 const InputField= ({ name, onChange, placeholder, type = "text", register, validationRules, error }) => {
