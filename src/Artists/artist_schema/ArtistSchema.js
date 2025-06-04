@@ -11,4 +11,15 @@ const artistSchema = new Schema({
   role: { type: String, default: 'artist' }
 }, { timestamps: true });
 
-export default model('Artist', artistSchema);
+const businessSchema = new Schema({
+  name: String,
+  email: { type: String, unique: true },
+  phoneNumber: String,
+  location: String,
+  postcode: String,
+  businessType: String,
+  role: { type: String, default: 'business' }
+}, { timestamps: true });
+
+export const Artist = model('Artist', artistSchema);
+export const Business = model('Business', businessSchema);

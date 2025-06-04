@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 function SignUpArtist() {
     const navigate = useNavigate()
     const {
-        artistFormData, setArtistFormData
+         setArtistFormData
     } = useArtistForm()
 const [but, updateButt] = useState(false)
 const [links, setLinks] = useState([])
@@ -27,18 +27,17 @@ const [links, setLinks] = useState([])
           };        
           setArtistFormData(updatedData);
 
-          fetch('http://localhost:5000/api/artist_signup', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedData),
+          fetch('http://localhost:5001/api/artist_signup', {
+             method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+             body: JSON.stringify(data),
+             credentials: 'include', 
           })
             .then(async (res) => {
               const response = await res.json();
               if (res.ok) {
                 console.log('✅ Artist registered:', response);
-                navigate('/artist_dashboard'); // only navigate if successful
+                navigate('/artist_dashboard');
               } else {
                 console.error(' Signup error:', response.error || response);
               }
@@ -46,9 +45,9 @@ const [links, setLinks] = useState([])
             .catch((err) => {
               console.error('Network error:', err);
             });
-          navigate('/artist_dashboard')
+          
     }
-    console.log(artistFormData)  
+ 
     
 
   return (
