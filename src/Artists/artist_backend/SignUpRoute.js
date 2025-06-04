@@ -1,6 +1,6 @@
-const express = require('express');
-const router = express.Router();
-const Artist = require('../artist_schema/ArtistSchema');
+import { Router } from 'express';
+const router = Router();
+import Artist from '../artist_schema/ArtistSchema.js';
 
 router.post('/artist_signup', async (req, res) => {
   try {
@@ -13,4 +13,4 @@ router.post('/artist_signup', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

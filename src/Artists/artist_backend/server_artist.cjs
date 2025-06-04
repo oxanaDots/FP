@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-const signupRoutes = require('../artist_backend/SignUpRoute');
+const signupRoutes = require('./SignUpRoute').default;
 
 const app = express();
 const PORT = process.env.PORT || 5000;
