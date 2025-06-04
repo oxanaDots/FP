@@ -2,9 +2,11 @@ import Home from './Home'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './App.css'
 import './index.css' 
-import SignUpArtist from './Components/Artists/SignUpArtist'
-import { ArtistFormProvider } from './Components/Artists/ArtistFormContext'
-import Roles from './Components/Artists/Roles'
+import SignUpArtist from './Artists/SignUpArtist'
+import { ArtistFormProvider } from './Artists/ArtistFormContext'
+import Roles from './Artists/Roles'
+import BusinessSignup from './Business/BusinessSignUp'
+import { BusinessFormProvider } from './Business/BusinessFormContext'
 function App() {
 
 
@@ -23,13 +25,19 @@ function App() {
       path: '/specify_role',
       element: <Roles/>
     },
+    {
+      path: '/business_signup',
+      element: <BusinessSignup/>
+    },
   ])
 
   return (
     <>
+    <BusinessFormProvider>
 <ArtistFormProvider>
 <RouterProvider router={router}/>
 </ArtistFormProvider>
+</BusinessFormProvider>
      
    
     </>

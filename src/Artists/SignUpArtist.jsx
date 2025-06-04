@@ -1,5 +1,5 @@
 import { useArtistForm } from './ArtistFormContext'
-import InputField from '../InputField';
+import InputField from '../Components/InputField';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -37,7 +37,7 @@ const [links, setLinks] = useState([])
 
 <div className=' flex  w-[40rem] justify-center items-center'>
     <form className=' flex flex-col w-[90vw] flex items-left p-4 justify-center text-center '  onSubmit={handleSubmit(onSubmit)}>
-          <legend className="text-xl text-center font-semibold mb-4">Make a Booking</legend>
+          <legend className="text-xl text-center font-semibold mb-4">Create an Account</legend>
 
           <div className=' w-100 flex justify-between w-full gap-4 '>
           <InputField
