@@ -16,6 +16,9 @@ function App() {
     { path: '/home',
       element: <Home/>
     },
+    { path: '/',
+      element: <Home/>
+    },
    
     {
       path: '/artist_signup',

@@ -1,7 +1,7 @@
 
 import { Router } from 'express';
 import Artist from '../artist_schema/ArtistSchema.js';
-import B from '../artist_schema/ArtistSchema.js';
+import Business from '../artist_schema/ArtistSchema.js';
 
 const router = Router();
 
