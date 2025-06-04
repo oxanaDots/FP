@@ -5,17 +5,28 @@ import { useState } from 'react';
 
 function SignUpArtist() {
     const {
-        setArtistFormData
+        artistFormData, setArtistFormData
     } = useArtistForm()
 const [but, updateButt] = useState(false)
+const [links, setLinks] = useState([])
     const {handleSubmit, register, formState: {errors}} = useForm({shouldUseNativeValidation: false})
 
     function onSubmit(data){
-        
-            setArtistFormData(data);
-            console.log('Form submitted:', data);
-    
+   
+
+        const linksArray = links
+        .split(',')
+        .map(link => link.trim())
+        .filter(link => link !== '');
+        const updatedData = {
+            ...data,
+            links: linksArray,
+          };        
+          setArtistFormData(updatedData);
+          
     }
+    console.log(artistFormData)  
+    
 
   return (
     <div className=" flex flex-col p-4 justify-center text-center items-center">
@@ -79,17 +90,23 @@ const [but, updateButt] = useState(false)
             }}
         error={errors.postcode}
       />
-
-   
-
-
+    
 </div>
-<div className='flex flex-col items-center gap-5  self-left'>
-   <div className='flex  justify-left items-center gap-5  self-left'>
-        <span onClick={()=> updateButt (prev=> ! prev) }>+</span>
-        <p className='text-xs py-1'>Add social media:</p>
+<InputField
+        name="phoneNumber"
+        placeholder="phone number"
+        register={register}
+        validationRules={{ required: 'Postcode is required',
+           
+            }}
+        error={errors.phoneNumber}
+      />
+<div className='flex flex-col w-full  gap-2 pt-2  self-left cursor-pointer'>
+   <div onClick={()=> updateButt (prev=> ! prev) }  className='flex  justify-left items-center gap-5  self-left '>
+        <span >{but ? '-':'+'}</span>
+        <p className='text-xs py-1'>Add comma separated links to your social media:</p>
         </div>
-        {but && true ?<textarea className='bg-ternary-light'></textarea> : ''  }
+        {but && <textarea  onChange={(e) => setLinks(e.target.value)} className='bg-ternary-light w-full px-3 text-sm py-[0.7rem] '></textarea>  }
       </div>
     <button className='submit-btn'>Submit</button>
   </form>
