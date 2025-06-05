@@ -5,9 +5,9 @@ import { NavLink } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
-import { useState, useEffect } from 'react';
+import {  useEffect, useState } from 'react';
 function Home() {
-  const [businesses, setBusinesses] = useState([]);
+  const [ setBusinesses] = useState([]);
   
   useEffect(() => {
     fetch('http://localhost:5001/api/businesses', {
@@ -44,8 +44,13 @@ function Home() {
   
    </div>
  
-   <section className='flex  h-[30rem] w-full justify-between rounded-md py-6'>
-         <MapContainer className='rounded-md ' style={{ height: '30rem', width: '100%'}} center={[51.505, -0.09]} zoom={15} scrollWheelZoom={true}>
+
+
+   <section className='grid grid-cols-[70%_30%] gap-4 border border-1 border-ternary-medium  w-full justify-between rounded-md py-6 px-4'>
+  
+
+ 
+         <MapContainer className='rounded-md ' style={{ height: '100%', width: '100%'}} center={[51.505, -0.09]} zoom={15} scrollWheelZoom={true}>
      <TileLayer
       detectRetina={true}
        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -57,17 +62,15 @@ function Home() {
        </Popup>
      </Marker>
    </MapContainer>
-   <section className='flex '>
-   
-   
-   <div>{businesses.map((item) => 
-   <div className='flex '>
-     <h2>{item.businessName}</h2>
-     <div><h2>{item.business_type}</h2></div>
+   <div className='col-2 grid  w-full'>
+   <div >
+    <h2>Art Hosts in your area:</h2>
+     <h2>name</h2>
+     <div><h2> type</h2></div>
      <h2></h2>
      </div>
-     )}</div>
- </section>
+    </div>
+
    </section>
    
 
