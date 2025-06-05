@@ -61,6 +61,16 @@ router.post('/business_signup', async (req, res) => {
       res.status(500).json({ error: 'Server error' });
     }
   });
+
+
+  router.get('/artist_dashboard', async (req, res)=>{
+    try{
+      const businesses = await Business.find({}, 'businessName phoneNumber location postcode')
+      res.json(businesses)
+    } catch (err){
+  res.status(500).json({error: 'Cannot fetch business'})
+    }
+  });
   
 
-export default router;
+  export default router;
