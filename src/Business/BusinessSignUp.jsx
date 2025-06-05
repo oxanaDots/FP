@@ -3,6 +3,8 @@ import InputField from '../Components/InputField';
 import { useForm } from 'react-hook-form';
 import {  useBusinessForm } from './BusinessFormContext';
 import { useNavigate } from 'react-router-dom';
+import services from '../services.json'
+
 function BusinessSignup() {
       const {handleSubmit, register, watch, formState: {errors}} = useForm({shouldUseNativeValidation: false})
     const {businessFormData, setbusinessFormData} = useBusinessForm()
@@ -119,6 +121,8 @@ function BusinessSignup() {
             error={errors.phoneNumber}
           />
              <InputField
+             type='select'
+             options={services}
             name="business_type"
             placeholder="type of business you own"
             register={register}

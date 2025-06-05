@@ -63,9 +63,9 @@ router.post('/business_signup', async (req, res) => {
   });
 
 
-  router.get('/artist_dashboard', async (req, res)=>{
+  router.get('/businesses', async (req, res)=>{
     try{
-      const businesses = await Business.find({}, 'businessName phoneNumber location postcode')
+      const businesses = await Business.find({}, 'businessName phoneNumber location postcode business_type')
       res.json(businesses)
     } catch (err){
   res.status(500).json({error: 'Cannot fetch business'})

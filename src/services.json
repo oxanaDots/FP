@@ -1,0 +1,14 @@
+[
+
+        { "category": "Services", "icon": "fi fi-rr-briefcase" },
+        { "category": "Food & Beverage", "icon": "fi fi-rr-utensils" },
+        { "category": "Retail", "icon": "fi fi-rr-shopping-bag" },
+        { "category": "Beauty & Wellness", "icon": "fi fi-rr-barber-shop" },
+        { "category": "Arts & Entertainment", "icon": "fi fi-rr-masks-theater" },
+        { "category": "Hospitality", "icon": "fi fi-rr-hotel" },
+        { "category": "Professional Services", "icon": "fi fi-rr-user-tie" },
+        { "category": "Healthcare", "icon": "fi fi-rr-hospital" },
+        { "category": "Education & Training", "icon": "fi fi-rr-graduation-cap" },
+        { "category": "Travel & Transportation", "icon": "fi fi-rr-plane" }
+ 
+]

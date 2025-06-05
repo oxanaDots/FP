@@ -81,8 +81,8 @@ form{
   
   }
   
-  ::-webkit-scrollbar-thumb {
-   @apply  bg-primary-medium rounded-xl border
+  /* .scroll::-webkit-scrollbar-thumb {
+   @apply  bg-ternary-light rounded-xl 
    
-  }
+  } */
 
