@@ -53,7 +53,7 @@ router.post('/business_signup', async (req, res) => {
   
       if (!user) return res.status(404).json({ error: 'User not found' });
   
-      const match = bcrypt.compare(password, user.password);
+      const match =  bcrypt.compare(password, user.password);
       if (!match) return res.status(401).json({ error: 'Invalid password' });
   
       res.status(200).json({ message: 'Login successful', user, role });

@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom';
 function ProtectedRoute({ children }) {
   const { user } = UserAuthContext();
 
-  if (!user) {
+  if (user) {
     return <Navigate to="/signin" replace />;
   }
 

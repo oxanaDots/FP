@@ -13,13 +13,15 @@ const artistSchema = new Schema({
 }, { timestamps: true });
 
 const businessSchema = new Schema({
-  name: String,
-  email: { type: String, unique: true },
-  phoneNumber: String,
-  location: String,
-  postcode: String,
-  businessType: String,
-  password: String,
+  firstName: String,
+ lastName:String,
+ businessName: String,
+ email: { type: String, unique: true },
+ phoneNumber:String,
+ business_type: String,
+ location: String,
+ postcode:String,
+ password: String,
   role: { type: String, default: 'business' }
 }, { timestamps: true });
 
@@ -27,3 +29,4 @@ const Artist = model('Artist', artistSchema);
  const Business = model('Business', businessSchema);
 
  export  {Artist, Business}
+

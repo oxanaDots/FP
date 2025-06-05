@@ -57,7 +57,7 @@ function App() {
 
   return (
     <div>
-      <h1 className='p-8'>Logo</h1>
+     
   <BusinessFormProvider>
     <AuthProvider>
 <ArtistFormProvider>

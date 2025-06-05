@@ -2,40 +2,41 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import InputField from '../Components/InputField';
+import { UserAuthContext } from './UserAuthContext';
 function SignIn() {
+    const {user, setUser} = UserAuthContext()
     const {handleSubmit, register, formState: {errors}} = useForm({shouldUseNativeValidation: false})
     const navigate = useNavigate()
     const onSubmit = async (data) => {
         try {
-          const res = await fetch('http://localhost:5001/api/signin', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify(data),
-          });
-    
-          const result = await res.json();
-    
-          if (res.ok) {
-            console.log('✅ Login successful:', result);
-    
-            // Redirect based on role
-            if (result.role === 'artist') {
-              navigate('/artist_dashboard');
-            } else if (result.role === 'business') {
-              navigate('/business_dashboard');
+            const res = await fetch('http://localhost:5001/api/signin', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              credentials: 'include',
+              body: JSON.stringify(data),
+            });
+      
+            const result = await res.json();
+      
+            if (res.ok) {
+              setUser(result.user); // set user context with name/email/id
+      
+              // Navigate to the correct dashboard based on role
+              if (result.role === 'artist') {
+                navigate('/artist_dashboard');
+              } else if (result.role === 'business') {
+                navigate('/business_dashboard');
+              }
+            } else {
+              alert(result.error);
             }
-          } else {
-            console.error('Login failed:', result.error);
-            alert(result.error);
+          } catch (err) {
+            alert(`Network error: ${err}`);
           }
-        } catch (err) {
-          console.error('Network error:', err);
-          alert('Network error. Please try again.');
-        }
+          console.log(data)
       };
     
-
+console.log(user)
   return (
     <div className=" flex flex-col p-4 justify-center text-center items-center">
 

@@ -85,3 +85,8 @@ form{
    @apply  bg-primary-medium rounded-xl border
    
   }
+
+  .leaflet-container {
+    height: 400px;
+    width: 100%;
+  }
