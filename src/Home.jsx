@@ -2,29 +2,80 @@ import React from 'react';
 import NavMenu from './NavMenu';
 import ExhibitionItem from './Components/ExhibitionItem';
 import { NavLink } from 'react-router-dom';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+
 
 import 'leaflet/dist/leaflet.css';
 import {  useEffect, useState } from 'react';
-function Home() {
-  const [ setBusinesses] = useState([]);
-  
+
+function LocationMarker({ setPosition }) {
+  const map = useMapEvents({
+    click() {
+      map.locate();
+    },
+    locationfound(e) {
+      setPosition(e.latlng);
+      map.flyTo(e.latlng, map.getZoom());
+    },
+  });
+
+  return null;
+}
+
+ function Home() {
+  const [ businesses,  setBusinesses] = useState([]);
+
+   const [position, setPosition] = useState(null)
+   
+
+ const [locations, setLocations] = useState([]);
+
   useEffect(() => {
-    fetch('http://localhost:5001/api/businesses', {
-      credentials: 'include',
-      method: 'GET',
-  
-    })
+
+    fetch('http://localhost:5001/api/businesses')
       .then(res => res.json())
-      .then(data => setBusinesses(data))
+      .then(async (data) => {
+        setBusinesses(data);
+
+      
+        const coords = await Promise.all(
+          data.map(async (biz) => {
+            const address = `${biz.location}, ${biz.postcode}`;
+            const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json`);
+            const geo = await res.json();
+            if (geo[0]) {
+              return {
+                name: biz.businessName,
+                lat: parseFloat(geo[0].lat),
+                lon: parseFloat(geo[0].lon),
+              };
+            }
+            return null;
+          })
+        );
+
+  
+        setLocations(coords.filter(Boolean));
+      })
       .catch(err => console.error('Failed to load businesses:', err));
   }, []);
+
+
+
+
+
+
+//   const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=YOUR_API_KEY`);
+// const data = await res.json();
+
+// const { lat, lng } = data.results[0].geometry.location;
+
   return (
     <div className='flex w-full flex-col justify-center items-center'>
 
     <NavMenu/>
 
-   <section className='flex flex-col  w-[50vw] h-[100vh] justify-center items-center'>
+   <section className='flex flex-col  w-[50vw] h-[100vh]  pt-20 items-center'>
 <h1 className='text-5xl py-3 font-semibold'>Main Heading</h1>
 <h3 className='text-2xl py-3'>Subheading</h3>
 <p className='text-sm py-3'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -50,24 +101,43 @@ function Home() {
   
 
  
-         <MapContainer className='rounded-md ' style={{ height: '100%', width: '100%'}} center={[51.505, -0.09]} zoom={15} scrollWheelZoom={true}>
-     <TileLayer
-      detectRetina={true}
-       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-     />
-     <Marker position={[51.505, -0.09]}>
-       <Popup>
-         A pretty CSS3 popup. <br /> Easily customizable.
-       </Popup>
-     </Marker>
-   </MapContainer>
-   <div className='col-2 grid  w-full'>
+    <MapContainer className='rounded-md' style={{ height: '100%', width: '100%' }} center={[51.505, -0.09]} zoom={15} scrollWheelZoom={true}>
+  <TileLayer
+    detectRetina={true}
+    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+  />
+
+  {/* Add the location finder */}
+<LocationMarker setPosition={setPosition} />
+
+
+  {position && (
+    <Marker position={position}>
+      <Popup>You are here</Popup>
+    </Marker>
+  )}
+    {locations.map((biz, idx) => (
+        <Marker key={idx} position={[biz.lat, biz.lon]}>
+          <Popup>{biz.name}</Popup>
+        </Marker>
+      ))}
+</MapContainer>
+   <div className='col-2 grid  w-full pr-4'>
    <div >
-    <h2>Art Hosts in your area:</h2>
-     <h2>name</h2>
-     <div><h2> type</h2></div>
-     <h2></h2>
+    <h2 className='text-sm font-semibold pb-4'>Art Hosts in your area:</h2>
+    <div className='overflow-y-scroll h-[25rem]'>
+    {businesses.map(item=> (
+      <div className='text-xs flex justify-between bg-white px-2 py-2 my-2'>
+     <h2>{item.businessName}</h2>
+    <h2> 0.5 miles</h2>
+    </div>
+ ) )}
+ <button></button>
+  </div>
+   
+
+ 
      </div>
     </div>
 

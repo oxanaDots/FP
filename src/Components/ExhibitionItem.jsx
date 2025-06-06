@@ -15,7 +15,7 @@ function ExhibitionItem({status = 'current'}) {
                </span>
                 <p>Medium</p>
          </div>
-         {status ==='upcoming'? <p>Jan 23</p> : null}
+         {status ==='upcoming'? <p>Jan 23</p> : 'Ends on Jan 30th'}
             </div>
             <p className=' row-3 '>Whispers of the Horizon captures a quiet moment at twilight, where the last blush of sunlight brushes over distant hills. Using a blend of warm gradients and layered textures, the piece evokes a sense of calm and subtle introspection. The silhouette of a lone figure stands in contrast with the boundless sky, inviting viewers to pause and reflect on the beauty of stillness and solitude. This digital work blends realism with impressionistic tones, making it a meditative exploration of light, space, and emotion.</p>
             <p className='row-2  self-end'>www.website.com</p>
